@@ -1,13 +1,16 @@
-import json
+def InitialFile():
+    return {
+        "Door": "Locked",
+        "Key Location": "Inside",
+        "Player Location": "Inside"
+    }
 
-with open("SaveFile.json") as f:
-    data = json.load(f)
+def GetDescription(data):
 
-description = ""
-if (data["Player Location"] == "Outside"):
-    description += "You've left the room. You win!"
-    quit()
-else:
+    if (data["Player Location"] == "Outside"):
+        return "You've left the room. You win!"
+
+    description = ""
     if (data["Door"] == "Locked"):
         description += "You're in a room with a locked door. \n"
     else:
@@ -18,23 +21,25 @@ else:
     else:
         description += "You are carrying a key. \n"
 
+    return description
+
+def GetActions(data):
+
+    actions = []
+
+    if (data["Player Location"] == "Outside"):
+        return actions
+
     if (data["Door"] == "Locked" and data["Key Location"] == "Player"):
-        # unlock door
-        pass
+        actions.append(("UnlockDoor", [("Door", "Unlocked")]))
     
     if (data["Key Location"] == "Player"):
-        # drop key
-        pass
+        actions.append(("DropKey", [("Key Location", data["Player Location"])]))
     
     if (data["Key Location"] == data["Player Location"]):
-        # pick up key
-        pass
+        actions.append(("PickUpKey", [("Key Location", "Player")]))
     
     if (data["Door"] == "Unlocked"):
-        # go outside
-        pass
+        actions.append(("LeaveRoom", [("Player Location", "Outside")]))
 
-print(description)
-
-#with open("sample.json", "w") as outfile:
-#    json.dump(data, outfile, indent = 4)
+    return actions

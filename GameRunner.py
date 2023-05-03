@@ -1,5 +1,6 @@
 import json
 import os
+import subprocess
 import sys
 
 level = "Levels/00 Sample Level"
@@ -30,6 +31,7 @@ else:
 for action in Script.GetActions(data):
     with open(f"{actionsDirectory}/{action[0]}.py", "a+") as myfile:
         myfile.write("import json\n")
+        myfile.write("import subprocess\n")
         myfile.write("\n")
         myfile.write("with open(\"../SaveFile.json\") as myfile:\n")
         myfile.write("    data = json.load(myfile)\n")
@@ -39,3 +41,14 @@ for action in Script.GetActions(data):
         myfile.write("\n")
         myfile.write("with open(\"../SaveFile.json\", \"w\") as myfile:\n")
         myfile.write("    json.dump(data, myfile, indent = 4)\n")
+        myfile.write("\n")
+        myfile.write("subprocess.call(\"git add -u\", shell=True)\n")
+        myfile.write(f"subprocess.call(\"git commit -m {action[0]}\", shell=True)\n")
+        
+if not os.path.isdir(level + "/.git"):
+    subprocess.call("git init", shell=True, cwd=level)
+    subprocess.call("git add .", shell=True, cwd=level)
+    subprocess.call("git commit -m start", shell=True, cwd=level)
+
+subprocess.call("git add .", shell=True, cwd=level)
+subprocess.call("git commit --amend --no-edit", shell=True, cwd=level)

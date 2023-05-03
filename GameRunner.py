@@ -6,6 +6,7 @@ import sys
 level = "Levels/00 Sample Level"
 saveFilePath = level + "/SaveFile.json"
 actionsDirectory = level + "/actions"
+gitDirectory = level + "/.git"
 
 sys.dont_write_bytecode = True
 sys.path.append(level)
@@ -45,10 +46,16 @@ for action in Script.GetActions(data):
         myfile.write("subprocess.call(\"git add -u\", shell=True)\n")
         myfile.write(f"subprocess.call(\"git commit -m {action[0]}\", shell=True)\n")
         
-if not os.path.isdir(level + "/.git"):
+if not os.path.isdir(gitDirectory):
     subprocess.call("git init", shell=True, cwd=level)
     subprocess.call("git add .", shell=True, cwd=level)
     subprocess.call("git commit -m start", shell=True, cwd=level)
+    with open(f"{gitDirectory}/hooks/pre-commit", "a+") as myfile:
+        myfile.write("#!/bin/sh\n")
+        myfile.write("./test.bat\n")
+    with open(f"{level}/test.bat", "a+") as myfile:
+        myfile.write("# I couldn't figure out how to run python from bash\n")
+        myfile.write("python ../../../../GameRunner.py\n")
+
 
 subprocess.call("git add .", shell=True, cwd=level)
-subprocess.call("git commit --amend --no-edit", shell=True, cwd=level)

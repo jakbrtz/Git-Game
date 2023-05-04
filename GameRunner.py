@@ -18,9 +18,15 @@ else:
         json.dump(data, myfile, indent = 4)
 
 print(Script.GetDescription(data))
-# todo: write to file?
 
-for action in Script.GetActions(data):
-    print(action[0])
-    #for instruction in action[1]:
-    #    myfile.write(f"data[\"{instruction[0]}\"] = \"{instruction[1]}\"\n")
+actions = Script.GetActions(data)
+
+for i, action in enumerate(actions):
+    print(f"{i}. {action[0]}")
+
+chosen = int(input())
+for instruction in actions[chosen][1]:
+    data[instruction[0]] = instruction[1]
+
+with open(saveFilePath, "w") as myfile:
+    json.dump(data, myfile, indent = 4)

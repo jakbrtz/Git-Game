@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-level = "Levels/00 Sample Level"
+level = "Levels/01 Learning to Branch"
 saveFilePath = level + "/SaveFile.json"
 
 sys.dont_write_bytecode = True
@@ -27,6 +27,9 @@ print(Script.GetDescription(data))
 
 actions = Script.GetActions(data)
 
+if len(actions) == 0:
+    exit()
+
 for i, action in enumerate(actions):
     print(f"{i}. {action[0]}")
 
@@ -38,4 +41,4 @@ with open(saveFilePath, "w") as myfile:
     json.dump(data, myfile, indent = 4)
 
 subprocess.call("git add .", shell=True, cwd=level, stdout=subprocess.DEVNULL)
-subprocess.call("git commit -m " + chosen[0], shell=True, cwd=level, stdout=subprocess.DEVNULL)
+subprocess.call("git commit -m \"" + chosen[0] + "\"", shell=True, cwd=level, stdout=subprocess.DEVNULL)

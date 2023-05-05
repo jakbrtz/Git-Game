@@ -34,8 +34,7 @@ for i, action in enumerate(actions):
     print(f"{i}. {action[0]}")
 
 chosen = actions[int(input())]
-for instruction in chosen[1]:
-    data[instruction[0]] = instruction[1]
+data.update(chosen[1])
 
 with open(saveFilePath, "w") as myfile:
     json.dump(data, myfile, indent = 4)

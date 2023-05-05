@@ -31,15 +31,15 @@ def GetActions(data):
         return actions
 
     if (data["Door"] == "Locked" and data["Key Location"] == "Player"):
-        actions.append(("Unlock Door", [("Door", "Unlocked")]))
+        actions.append(("Unlock Door", {"Door": "Unlocked"}))
     
     if (data["Key Location"] == "Player"):
-        actions.append(("Drop Key", [("Key Location", data["Player Location"])]))
+        actions.append(("Drop Key", {"Key Location": data["Player Location"]}))
     
     if (data["Key Location"] == data["Player Location"]):
-        actions.append(("Pick Up Key", [("Key Location", "Player")]))
+        actions.append(("Pick Up Key", {"Key Location": "Player"}))
     
     if (data["Door"] == "Unlocked"):
-        actions.append(("Leave Room", [("Player Location", "Outside")]))
+        actions.append(("Leave Room", {"Player Location": "Outside"}))
 
     return actions

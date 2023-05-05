@@ -59,19 +59,19 @@ def GetActions(data):
         else:
             digit = "Digit3"
         for i in range(10):
-            instructions = [(digit, str(i))]
+            instructions = {digit: str(i)}
             if digit == "Digit3":
-                instructions.append(("Entering Combination", "False"))
+                instructions["Entering Combination"] = "False"
                 if data["Digit1"] == "4" and data["Digit2"] == "1" and i == 1:
-                    instructions.append(("Box", "Unlocked"))
+                    instructions["Box"] = "Unlocked"
             actions.append(("Enter " + str(i), instructions))
         return actions
 
     if data["Box"] == "Locked":
-        actions.append(("Enter combination", [("Entering Combination", "True"), ("Digit1", ""), ("Digit2", ""), ("Digit3", "")]))
+        actions.append(("Enter combination", {"Entering Combination": "True", "Digit1": "", "Digit2": "", "Digit3": ""}))
     elif data["Trophy Location"] == "Box":
-        actions.append(("Take Trophy", [("Trophy Location", "Player")]))
+        actions.append(("Take Trophy", {"Trophy Location": "Player"}))
 
-    actions.append(("Jump in hole", [("Player Location", "Hole")]))
+    actions.append(("Jump in hole", {"Player Location": "Hole"}))
 
     return actions

@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-level = "Levels/01 Learning to Branch"
+level = "Levels/02 Learning to Merge"
 saveFilePath = level + "/SaveFile.json"
 
 sys.dont_write_bytecode = True

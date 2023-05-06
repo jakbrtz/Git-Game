@@ -23,29 +23,33 @@ if not os.path.isdir(level + "/.git"):
     subprocess.call("git add .", shell=True, cwd=level, stdout=subprocess.DEVNULL)
     subprocess.call("git commit -m start", shell=True, cwd=level, stdout=subprocess.DEVNULL)
 
-print(Script.GetDescription(data))
+while True:
 
-actions = Script.GetActions(data)
+    print(Script.GetDescription(data))
 
-if len(actions) == 0:
-    exit()
+    actions = Script.GetActions(data)
 
-for i, action in enumerate(actions):
-    print(f"{i}. {action[0]}")
+    if len(actions) == 0:
+        exit()
 
-gitHead1 = subprocess.check_output("git rev-parse HEAD", shell=True, cwd=level)
+    for i, action in enumerate(actions):
+        print(f"{i}. {action[0]}")
 
-chosen = actions[int(input())]
-data.update(chosen[1])
+    gitHead1 = subprocess.check_output("git rev-parse HEAD", shell=True, cwd=level)
 
-gitHead2 = subprocess.check_output("git rev-parse HEAD", shell=True, cwd=level)
+    chosen = actions[int(input())]
+    data.update(chosen[1])
 
-if gitHead1 != gitHead2:
-    print("You cannot perform an action anymore because the git head changed. Please rerun this.")
-    exit()
+    gitHead2 = subprocess.check_output("git rev-parse HEAD", shell=True, cwd=level)
 
-with open(saveFilePath, "w") as myfile:
-    json.dump(data, myfile, indent = 4, separators = (",\n", ":"))
+    if gitHead1 != gitHead2:
+        print("You cannot perform an action anymore because the git head changed. Please try again.")
+        with open(saveFilePath) as myfile:
+            data = json.load(myfile)
+        continue
 
-subprocess.call("git add .", shell=True, cwd=level, stdout=subprocess.DEVNULL)
-subprocess.call("git commit -m \"" + chosen[0] + "\"", shell=True, cwd=level, stdout=subprocess.DEVNULL)
+    with open(saveFilePath, "w") as myfile:
+        json.dump(data, myfile, indent = 4, separators = (",\n", ":"))
+
+    subprocess.call("git add .", shell=True, cwd=level, stdout=subprocess.DEVNULL)
+    subprocess.call("git commit -m \"" + chosen[0] + "\"", shell=True, cwd=level, stdout=subprocess.DEVNULL)

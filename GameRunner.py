@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-level = "Levels/02 Learning to Merge"
+level = "Levels/04 Merge Nuance"
 saveFilePath = level + "/SaveFile.json"
 
 sys.dont_write_bytecode = True

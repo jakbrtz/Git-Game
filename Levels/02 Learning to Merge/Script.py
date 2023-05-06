@@ -1,5 +1,6 @@
 def InitialFile():
     return {
+        "Key Location": "Table",
         "Red Chest": "Locked",
         "Green Chest": "Locked",
         "Blue Chest": "Locked",
@@ -44,10 +45,13 @@ def GetDescription(data):
         if data["Battery Location"] == "Picker":
             description += "You are holding a powered magic lock picker. \n"
         else:
-            description += "You are holding an unpowered magic lock picker. It runs on batteries. \n"
+            description += "You are holding an unpowered magic lock picker. It requires a battery. \n"
 
     if data["Key"] == "Intact":
-        description += "You are carrying a fragile key. It will break after you use it. \n"
+        if data["Key Location"] == "Table":
+            description += "There is also a fragile key you can pick up. \n"
+        else:
+            description += "You are carrying a fragile key. It will break after you use it. \n"
 
     return description
 
@@ -57,13 +61,16 @@ def GetActions(data):
 
     if data["Trophy Location"] == "Player":
         return actions
+    
+    if data["Key Location"] == "Table":
+        actions.append(("Pick up fragile key", {"Key Location":"Player"}))
 
-    if data["Red Chest"] == "Locked" and data["Key"] == "Intact":
+    if data["Red Chest"] == "Locked" and data["Key"] == "Intact" and data["Key Location"] == "Player":
         actions.append(("Unlock red chest", {"Red Chest":"Unlocked","Key":"Broken"}))
     if data["Red Chest"] == "Unlocked" and data["Battery Location"] == "Red Chest":
         actions.append(("Take battery", {"Battery Location":"Player"}))
 
-    if data["Green Chest"] == "Locked" and data["Key"] == "Intact":
+    if data["Green Chest"] == "Locked" and data["Key"] == "Intact" and data["Key Location"] == "Player":
         actions.append(("Unlock green chest", {"Green Chest":"Unlocked","Key":"Broken"}))
     if data["Green Chest"] == "Unlocked" and data["Picker Location"] == "Green Chest":
         actions.append(("Take magic lock picker", {"Picker Location":"Player"}))
@@ -74,6 +81,6 @@ def GetActions(data):
         actions.append(("Take trophy", {"Trophy Location":"Player"}))
 
     if data["Picker Location"] == "Player" and data["Battery Location"] == "Player":
-        actions.append(("Put batter in magic lock picker", {"Battery Location":"Picker"}))
+        actions.append(("Put battery in magic lock picker", {"Battery Location":"Picker"}))
 
     return actions

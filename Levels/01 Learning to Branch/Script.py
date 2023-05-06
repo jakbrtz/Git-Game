@@ -45,16 +45,16 @@ def GetActions(data):
 
     actions = []
 
-    if (data["Trophy Location"] == "Player"):
+    if data["Trophy Location"] == "Player":
         return actions
 
-    if (data["Player Location"] == "Hole"):
+    if data["Player Location"] == "Hole":
         return actions
 
-    if (data["Entering Combination"] == "True"):
-        if (data["Digit1"] == ""):
+    if data["Entering Combination"] == "True":
+        if data["Digit1"] == "":
             digit = "Digit1"
-        elif (data["Digit2"] == ""):
+        elif data["Digit2"] == "":
             digit = "Digit2"
         else:
             digit = "Digit3"

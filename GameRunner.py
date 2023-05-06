@@ -33,8 +33,16 @@ if len(actions) == 0:
 for i, action in enumerate(actions):
     print(f"{i}. {action[0]}")
 
+gitHead1 = subprocess.check_output("git rev-parse HEAD", shell=True, cwd=level)
+
 chosen = actions[int(input())]
 data.update(chosen[1])
+
+gitHead2 = subprocess.check_output("git rev-parse HEAD", shell=True, cwd=level)
+
+if gitHead1 != gitHead2:
+    print("You cannot perform an action anymore because the git head changed. Please rerun this.")
+    exit()
 
 with open(saveFilePath, "w") as myfile:
     json.dump(data, myfile, indent = 4, separators = (",\n", ":"))

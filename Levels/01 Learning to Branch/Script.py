@@ -1,10 +1,6 @@
 def InitialFile():
     return {
         "Player Location": "Outside",
-        "Entering Combination": "False",
-        "Digit1": "",
-        "Digit2": "",
-        "Digit3": "",
         "Box": "Locked",
         "Trophy Location": "Box"
     }
@@ -22,12 +18,6 @@ def GetDescription(data):
         description += "There's nothing you can do from in here. \n"
         description += "Use git to branch off from an eariler point in the story."
         return description
-
-    if (data["Entering Combination"] == "True"):
-        if (data["Digit1"] == ""):
-            return "What's the first digit of the combination?"
-        else:
-            return "What's the next digit of the combination?"
 
     description = ""
     description += "You're standing outside. \n"
@@ -51,27 +41,20 @@ def GetActions(data):
     if data["Player Location"] == "Hole":
         return actions
 
-    if data["Entering Combination"] == "True":
-        if data["Digit1"] == "":
-            digit = "Digit1"
-        elif data["Digit2"] == "":
-            digit = "Digit2"
-        else:
-            digit = "Digit3"
-        for i in range(10):
-            instructions = {digit: str(i)}
-            if digit == "Digit3":
-                instructions["Entering Combination"] = "False"
-                if data["Digit1"] == "4" and data["Digit2"] == "1" and i == 1:
-                    instructions["Box"] = "Unlocked"
-            actions.append(("Enter " + str(i), instructions))
-        return actions
-
     if data["Box"] == "Locked":
-        actions.append(("Enter combination", {"Entering Combination": "True", "Digit1": "", "Digit2": "", "Digit3": ""}))
+        actions.append(("Enter combination", EnterCombination))
     elif data["Trophy Location"] == "Box":
         actions.append(("Take Trophy", {"Trophy Location": "Player"}))
 
     actions.append(("Jump in hole", {"Player Location": "Hole"}))
 
     return actions
+
+def EnterCombination():
+    print("What combination do you want to try?")
+    if input() == "411":
+        print("Correct!")
+        return {"Box":"Unlocked"}
+    else:
+        print("Incorrect")
+        return {}

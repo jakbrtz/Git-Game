@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-level = "Levels/06 Ladders"
+level = "Levels/01 Learning to Branch"
 saveFilePath = level + "/SaveFile.json"
 
 sys.dont_write_bytecode = True
@@ -38,8 +38,11 @@ while True:
     gitHead1 = subprocess.check_output("git rev-parse HEAD", shell=True, cwd=level)
 
     chosen = actions[int(input())]
+    if (callable(chosen[1])):
+        data.update(chosen[1]())
+    else:
+        data.update(chosen[1])
     print()
-    data.update(chosen[1])
 
     gitHead2 = subprocess.check_output("git rev-parse HEAD", shell=True, cwd=level)
 

@@ -16,7 +16,7 @@ if os.path.exists(saveFilePath):
 else:
     data = Script.InitialFile()
     with open(saveFilePath, "w") as myfile:
-        json.dump(data, myfile, indent = 4, separators = (",\n", ":"))
+        json.dump(data, myfile, indent = 4, separators = (",\n", ": "))
 
 if not os.path.isdir(level + "/.git"):
     subprocess.call("git init", shell=True, cwd=level, stdout=subprocess.DEVNULL)

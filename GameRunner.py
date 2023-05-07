@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-level = "Levels/07 Teleportation"
+level = "Levels/03 Zipline"
 saveFilePath = level + "/SaveFile.json"
 
 sys.dont_write_bytecode = True

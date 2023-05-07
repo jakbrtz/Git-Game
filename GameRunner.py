@@ -38,18 +38,19 @@ while True:
     gitHead1 = subprocess.check_output("git rev-parse HEAD", shell=True, cwd=level)
 
     chosen = actions[int(input())]
+    print()
     data.update(chosen[1])
 
     gitHead2 = subprocess.check_output("git rev-parse HEAD", shell=True, cwd=level)
 
     if gitHead1 != gitHead2:
-        print("You cannot perform an action anymore because the git head changed. Please try again.")
+        print("You cannot perform an action anymore because the git head changed. Please try again. \n")
         with open(saveFilePath) as myfile:
             data = json.load(myfile)
         continue
 
     with open(saveFilePath, "w") as myfile:
-        json.dump(data, myfile, indent = 4, separators = (",\n", ":"))
+        json.dump(data, myfile, indent = 4, separators = (",\n", ": "))
 
     subprocess.call("git add .", shell=True, cwd=level, stdout=subprocess.DEVNULL)
     subprocess.call("git commit -m \"" + chosen[0] + "\"", shell=True, cwd=level, stdout=subprocess.DEVNULL)

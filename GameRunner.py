@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-level = "Levels/05 Merge Conflict"
+level = "Levels/06 Ladders"
 saveFilePath = level + "/SaveFile.json"
 
 sys.dont_write_bytecode = True

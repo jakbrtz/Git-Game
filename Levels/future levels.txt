@@ -1,0 +1,10 @@
+Cherry picks are a way to undo:
+1. Do bad action
+2. Do good action
+3. Checkout before bad action
+4. Cherry pick good action
+
+Cherry picks can also be used to replay actions
+1. Pick up fragile key
+2. Use fragile key
+3. Cherry pick picking up the fragile key

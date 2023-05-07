@@ -3,7 +3,7 @@ import os
 import subprocess
 import sys
 
-level = "Levels/01 Learning to Branch"
+level = "Levels/07 Teleportation"
 saveFilePath = level + "/SaveFile.json"
 
 sys.dont_write_bytecode = True

@@ -10,56 +10,53 @@ def InitialFile():
 def GetDescription(data):
     
     if data["Player Location"] == "Outside":
-        return "You have left the room. You win!"
+        print("You have left the room. You win!")
+        return
     
-    description = ""
-
     if data["Player Location"] == "Floor":
-        description += "You are standing in a room. \n"
-        description += "There are two platforms above you with ladders leading to them. \n"
-        description += "One platform is 5m high and the other is 6m high. \n"
+        print("You are standing in a room.")
+        print("There are two platforms above you with ladders leading to them.")
+        print("One platform is 5m high and the other is 6m high.")
     
     if data["Player Location"] == "Lower Platform":
-        description += "You are on the lower platform. \n"
+        print("You are on the lower platform.")
         if CableConnects("Lower Platform", "Higher Platform", data):
-            description += "The cable is tied to the hook on this platform as well as the hook on the other platform. \n"
+            print("The cable is tied to the hook on this platform as well as the hook on the other platform.")
         elif data["Cable Red Side"] == "Lower Platform" or data["Cable Green Side"] == "Lower Platform":
-            description += "The cable is tied to the hook on this platform. \n"
+            print("The cable is tied to the hook on this platform.")
             if CableConnects("Player", "Lower Platform", data):
-                description += "You can't climb down the ladder while holding the rope because it is tied to the hook. \n"
+                print("You can't climb down the ladder while holding the rope because it is tied to the hook.")
         else:
-            description += "There is a hook where you can tie a cable to. \n"
+            print("There is a hook where you can tie a cable to.")
         if data["Door"] == "Intact":
-            description += "There is a locked wooden door blocking the exit. \n"
+            print("There is a locked wooden door blocking the exit.")
         else:
-            description += "There is a hole where the door used to be. \n"
+            print("There is a hole where the door used to be.")
     
     if data["Player Location"] == "Higher Platform":
-        description += "You are on the higher platform. \n"
+        print("You are on the higher platform.")
         if CableConnects("Lower Platform", "Higher Platform", data):
-            description += "The cable is tied to the hook on this platform as well as the hook on the other platform. \n"
+            print("The cable is tied to the hook on this platform as well as the hook on the other platform.")
         elif data["Cable Red Side"] == "Higher Platform" or data["Cable Green Side"] == "Higher Platform":
-            description += "The cable is tied to the hook on this platform. \n"
+            print("The cable is tied to the hook on this platform.")
             if CableConnects("Player", "Higher Platform", data):
-                description += "You can't climb down the ladder while holding the rope because it is tied to the hook. \n"
+                print("You can't climb down the ladder while holding the rope because it is tied to the hook.")
         else:
-            description += "There is a hook where you can tie a cable to. \n"
+            print("There is a hook where you can tie a cable to.")
     
     if data["Cable Red Side"] == data["Player Location"] or data["Cable Green Side"] == data["Player Location"]:
         if data["Player Location"] == "Floor":
-            description += "There is a 4m cable you can pick up. \n"
+            print("There is a 4m cable you can pick up.")
         else:
-            description += "You can untie the cable. \n"
+            print("You can untie the cable.")
     elif data["Cable Red Side"] == "Player" or data["Cable Green Side"] == "Player":
-        description += "You are carrying a cable. \n"
+        print("You are carrying a cable.")
     
     if data["Drill Location"] == data["Player Location"]:
-        description += "There is a huge drill. \n"
-        description += "It is too heavy to carry. \n"
+        print("There is a huge drill.")
+        print("It is too heavy to carry.")
         if CableConnects("Lower Platform", "Higher Platform", data) and data["Drill Location"] == "Higher Platform":
-            description += "You could hook it onto the cable. \n"
-
-    return description
+            print("You could hook it onto the cable.")
 
 def GetActions(data):
 

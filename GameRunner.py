@@ -33,8 +33,7 @@ if not os.path.isdir(".git"):
 
 while True:
 
-    print(Script.GetDescription(data))
-
+    Script.GetDescription(data)
     actions = Script.GetActions(data)
 
     if len(actions) == 0:

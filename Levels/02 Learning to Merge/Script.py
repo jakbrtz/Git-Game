@@ -13,47 +13,44 @@ def InitialFile():
 def GetDescription(data):
 
     if data["Trophy Location"] == "Player":
-        return "You've got the trophy. You win!"
+        print("You've got the trophy. You win!")
+        return
 
-    description = ""
-
-    description += "There are 3 chests in front of you. \n"
+    print("There are 3 chests in front of you.")
     if data["Red Chest"] == "Locked":
-        description += "The red chest is locked with a simple lock. \n"
+        print("The red chest is locked with a simple lock.")
     elif data["Battery Location"] == "Red Chest":
-        description += "The red chest is unlocked and contains a battery. \n"
+        print("The red chest is unlocked and contains a battery.")
     else:
-        description += "The red chest is empty. \n"
+        print("The red chest is empty.")
     
     if data["Green Chest"] == "Locked":
-        description += "The green chest is locked with a simple lock. \n"
+        print("The green chest is locked with a simple lock.")
     elif data["Picker Location"] == "Green Chest":
-        description += "The green chest is unlocked and contains a magic lock picker. \n"
+        print("The green chest is unlocked and contains a magic lock picker.")
     else:
-        description += "The green chest is empty. \n"
+        print("The green chest is empty.")
 
     if data["Blue Chest"] == "Locked":
-        description += "The blue chest is locked with a complicated lock. \n"
+        print("The blue chest is locked with a complicated lock.")
     elif data["Trophy Location"] == "Blue Chest":
-        description += "The blue chest is unlocked and contains the trophy. \n"
+        print("The blue chest is unlocked and contains the trophy.")
     else:
-        description += "The blue chest is empty. \n"
+        print("The blue chest is empty.")
     
     if data["Battery Location"] == "Player":
-        description += "You are holding a battery. \n"
+        print("You are holding a battery.")
     if data["Picker Location"] == "Player":
         if data["Battery Location"] == "Picker":
-            description += "You are holding a powered magic lock picker. \n"
+            print("You are holding a powered magic lock picker.")
         else:
-            description += "You are holding an unpowered magic lock picker. It requires a battery. \n"
+            print("You are holding an unpowered magic lock picker. It requires a battery.")
 
     if data["Key"] == "Intact":
         if data["Key Location"] == "Table":
-            description += "There is also a fragile key you can pick up. \n"
+            print("There is also a fragile key you can pick up.")
         else:
-            description += "You are carrying a fragile key. It will break after you use it. \n"
-
-    return description
+            print("You are carrying a fragile key. It will break after you use it.")
 
 def GetActions(data):
 

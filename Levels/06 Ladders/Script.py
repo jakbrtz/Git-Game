@@ -9,36 +9,35 @@ def InitialFile():
 def GetDescription(data):
 
     if data["Trophy Location"] == "Player":
-        return "You have the trophy. You win!"
+        print("You have the trophy. You win!")
+        return
 
     description = ""
     if data["Player Location"] == "Ground":
-        description += "You're on the ground. \n"
-        description += "There are two platforms above you, one higher than the other. \n"
+        print("You're on the ground.")
+        print("There are two platforms above you, one higher than the other.")
         if data["Ladder Location"] == "Ground":
-            description += "There's a ladder you can pick up. \n"
+            print("There's a ladder you can pick up.")
             if data["Ladder Leads To"] == "Lower Platform":
-                description += "You can climb it to get to the Lower Platform. \n "
+                print("You can climb it to get to the Lower Platform.")
     elif data["Player Location"] == "Lower Platform":
-        description += "You're on the lower platform. \n"
-        description += "There is another platform above you. \n"
+        print("You're on the lower platform.")
+        print("There is another platform above you.")
         if data["Ladder Location"] == "Lower Platform":
-            description += "There's a ladder you can pick up. \n"
+            print("There's a ladder you can pick up.")
             if data["Ladder Leads To"] == "Highter Platform":
-                description += "You can climb it to get to the Higher Platform. \n"
+                print("You can climb it to get to the Higher Platform.")
     else:
-        description += "You're on the higher platform. \n"
+        print("You're on the higher platform.")
         if data["Ladder Location"] == "Higher Platform":
-            description += "There's a ladder you can pick up. \n"
+            print("There's a ladder you can pick up.")
     
     if data["Trophy Location"] == data["Player Location"]:
-        description += "You can pick up the trophy. \n"
+        print("You can pick up the trophy.")
     
     if data["Ladder Location"] == "Player":
-        description += "You are carrying the ladder. \n"
+        print("You are carrying the ladder.")
     
-    return description
-
 def GetActions(data):
 
     actions = []

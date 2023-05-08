@@ -9,37 +9,34 @@ def InitialFile():
 def GetDescription(data):
 
     if data["Player Location"] == "Outside":
-        return "You've left the rooms. You win!"
+        print("You've left the rooms. You win!")
+        return
     
-    description = ""
-
     if data["Player Location"] == "Room 1":
-        description += "You're standing in the first room. \n"
+        print("You're standing in the first room.")
         if data["Room 1 door"] == "Intact":
-            description += "There is a locked wooden door preventing you from going to the next room. \n"
+            print("There is a locked wooden door preventing you from going to the next room.")
         else:
-            description += "There is a door frame you could walk through to get to the next room. \n"
+            print("There is a door frame you could walk through to get to the next room.")
     
     if data["Player Location"] == "Room 2":
-        description += "You're standing in the second room. \n"
-        description += "There is an open door frame leading back to the first room. \n"
-        description += "There is a ladder leading up to an elevated platform which has a door leading to the exit. \n"
+        print("You're standing in the second room.")
+        print("There is an open door frame leading back to the first room.")
+        print("There is a ladder leading up to an elevated platform which has a door leading to the exit.")
         if data["Axe Location"] == "Player":
-            description += "You cannot climb the ladder while carrying the axe. \n"
+            print("You cannot climb the ladder while carrying the axe.")
 
     if data["Player Location"] == "Room 2 Platform":
-        description += "You're standing on the platform in the second room. \n"
+        print("You're standing on the platform in the second room.")
         if data["Room 2 door"] == "Intact":
-            description += "There is a locked wooden door preventing you from exiting. \n"
+            print("There is a locked wooden door preventing you from exiting.")
         else:
-            description += "There is a door frame you could walk through to get to exit. \n"
+            print("There is a door frame you could walk through to get to exit.")
     
     if data["Axe Location"] == "Player":
-        description += "You are carrying an axe. \n"
+        print("You are carrying an axe.")
     elif data["Axe Location"] == data["Player Location"]:
-        description += "There is an axe on the floor you can pick up. \n"
-
-    return description
+        print("There is an axe on the floor you can pick up.")
 
 def GetActions(data):
 

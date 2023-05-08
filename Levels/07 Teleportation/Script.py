@@ -8,30 +8,28 @@ def InitialFile():
 def GetDescription(data):
 
     if data["Player Location"] == "Outside":
-        return "You've left the room. You win!"
+        print("You've left the room. You win!")
+        return
 
-    description = ""
     if data["Player Location"] == "Attic":
-        description += "You're in the attic. There are two holes you can jump into. \n"
-        description += "One leads to the green room, the other hole leads to the blue room. \n"
+        print("You're in the attic. There are two holes you can jump into.")
+        print("One leads to the green room, the other hole leads to the blue room.")
     
     if data["Player Location"] == "Green Room":
-        description += "You're in the green room. \n"
+        print("You're in the green room.")
     
     if data["Player Location"] == "Blue Room":
-        description += "You're in the blue room. \n"
+        print("You're in the blue room.")
         if data["Door"] == "Locked":
-            description += "There is a locked door. \n"
+            print("There is a locked door.")
         else:
-            description += "There is an unlocked door leading out. \n"
+            print("There is an unlocked door leading out.")
     
     if data["Key Location"] == "Player":
-        description += "You are holding a key. \n"
+        print("You are holding a key.")
     if data["Key Location"] == data["Player Location"]:
-        description += "There is a key on the ground you can pick up. \n"
+        print("There is a key on the ground you can pick up.")
     
-    return description
-
 def GetActions(data):
 
     actions = []

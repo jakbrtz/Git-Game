@@ -8,28 +8,27 @@ def InitialFile():
 def GetDescription(data):
 
     if (data["Trophy Location"] == "Player"):
-        return "You have the trophy. You win!"
+        print("You have the trophy. You win!")
 
     if (data["Player Location"] == "Hole"):
-        description = ""
-        description += "You're at the bottom of the hole. \n"
-        description += "There's a sign that says the password is 411. \n"
-        description += "The hole is too deep for you to climb out. \n"
-        description += "There's nothing you can do from in here. \n"
-        description += "Use git to branch off from an eariler point in the story."
-        return description
+        print("You're at the bottom of the hole.")
+        print("There's a sign that says the password is 411.")
+        print("The hole is too deep for you to climb out.")
+        print("There's nothing you can do from in here.")
+        print("Use git to branch off from an eariler point in the story.")
+        return
 
     description = ""
-    description += "You're standing outside. \n"
-    description += "There is a box with a combination lock. "
+    print("You're standing outside.")
+    print("There is a box with a combination lock.")
     if (data["Box"] == "Locked"):
-        description += "It is locked. \n"
+        print("It is locked.")
     else:
-        description += "It is unlocked. \n"
-        description += "Inside the box is a trophy. \n"
-    description += "There is a hole next to you which you can jump in but it's pretty deep. \n"
-    description += "There is some useful writing at the bottom of the hole, but you can't see what it says from where you are. \n"
-    return description
+        print("It is unlocked.")
+        print("Inside the box is a trophy.")
+    print("There is a hole next to you which you can jump in but it's pretty deep.")
+    print("There is some useful writing at the bottom of the hole, but you can't see what it says from where you are.")
+    print()
 
 def GetActions(data):
 

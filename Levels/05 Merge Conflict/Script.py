@@ -11,30 +11,27 @@ def GetDescription(data):
 
     if data["Player Location"] == "Outside":
         if data["Health"] == "Injured":
-            return "You've left the room but you're too injured, so it doesn't count as a win."
+            print("You've left the room but you're too injured, so it doesn't count as a win.")
         else:
-            return "You've left the room. You win!"
+            print("You've left the room. You win!")
+        return
 
-    description = ""
-
-    description += "You're inside the room. \n"
+    print("You're inside the room.")
     if data["Dynamite"] == "Unexploded":
         if data["Dynamite Location"] == "Inside":
-            description += "There is a dynamite on the floor. \n"
+            print("There is a dynamite on the floor.")
         else:
-            description += "You are holding a dynamite. \n"
+            print("You are holding a dynamite.")
 
     if data["Room"] == "Intact":
-        description += "There is a locked door preventing you from leaving. \n"
+        print("There is a locked door preventing you from leaving.")
     else:
-        description += "The whole room is destroyed. \n"
+        print("The whole room is destroyed.")
     
     if data["Health"] == "Sore":
-        description += "Your cheek is a bit sore. \n"
+        print("Your cheek is a bit sore.")
     if data["Health"] == "Injured":
-        description += "You're too injured to move. \n"
-
-    return description
+        print("You're too injured to move.")
 
 def GetActions(data):
 

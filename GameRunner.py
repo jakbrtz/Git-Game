@@ -33,12 +33,12 @@ if not os.path.isdir(".git"):
 
 while True:
 
-    Script.GetDescription(data)
-    actions = Script.GetActions(data)
+    actions = Script.DescribeAndGetActions(data)
 
     if len(actions) == 0:
         exit()
 
+    print()
     for i, action in enumerate(actions):
         print(f"{i}. {action[0]}")
 

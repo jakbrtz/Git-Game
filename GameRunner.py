@@ -37,7 +37,7 @@ if not os.path.isdir(".git"):
 while True:
 
     # Tell the user what's going on and get the list of possible actions
-    print()
+    print("\n\n")
     actions = Script.DescribeAndGetActions(data)
     print()
 
@@ -45,9 +45,6 @@ while True:
     if len(actions) == 0:
         print("No actions available")
         exit()
-
-    # Before waiting for user input, record the current save file
-    gitHead1 = subprocess.check_output("git rev-parse HEAD", shell=True)
 
     # Ask the user to pick an action
     print("Available actions:")
@@ -62,11 +59,11 @@ while True:
         exit()
 
     # Compare the active save file to the actual save file
-    gitHead2 = subprocess.check_output("git rev-parse HEAD", shell=True)
-    if gitHead1 != gitHead2:
-        print("You cannot perform an action anymore because the git head changed. Please try again. \n")
-        with open(saveFilePath) as myfile:
-            data = json.load(myfile)
+    with open(saveFilePath) as myfile:
+        tmpdata = json.load(myfile)
+    if data != tmpdata:
+        print("Save file has been edited externally. Please try again.")
+        data = tmpdata
         continue
 
     # Update the save file

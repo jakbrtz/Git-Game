@@ -33,31 +33,37 @@ if not os.path.isdir(".git"):
 
 while True:
 
-    actions = Script.DescribeAndGetActions(data)
-
-    if len(actions) == 0:
-        exit()
-
     print()
-    for i, action in enumerate(actions):
-        print(f"{i}. {action[0]}")
+    actions = Script.DescribeAndGetActions(data)
+    print()
+    if len(actions) == 0:
+        print("No actions available")
+        exit()
 
     gitHead1 = subprocess.check_output("git rev-parse HEAD", shell=True)
 
-    chosen = actions[int(input())]
-    if (callable(chosen[1])):
-        data.update(chosen[1]())
-    else:
-        data.update(chosen[1])
+    print("Available actions:")
+    for i, action in enumerate(actions):
+        print(f"{i}. {action[0]}")
     print()
 
-    gitHead2 = subprocess.check_output("git rev-parse HEAD", shell=True)
+    try:
+        chosen = actions[int(input("Pick an action by entering its number: "))]
+    except:
+        print("Exiting...")
+        exit()
 
+    gitHead2 = subprocess.check_output("git rev-parse HEAD", shell=True)
     if gitHead1 != gitHead2:
         print("You cannot perform an action anymore because the git head changed. Please try again. \n")
         with open(saveFilePath) as myfile:
             data = json.load(myfile)
         continue
+
+    if (callable(chosen[1])):
+        data.update(chosen[1]())
+    else:
+        data.update(chosen[1])
 
     with open(saveFilePath, "w") as myfile:
         json.dump(data, myfile, indent = 4, separators = (",\n", ": "))

@@ -34,6 +34,7 @@ The git commands that you're intended to use are:
 * `switch` - change which branch you're on
 * `merge` - combine two branches
   * In the event of a merge conflict, you must resolve all conflicts by selecting changes from the files.
+* `revert` - undoes a commit, but not necessarily the most recent one
 
 ## How to make a level
 

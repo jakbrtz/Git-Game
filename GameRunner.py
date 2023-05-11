@@ -40,7 +40,8 @@ if not os.path.isdir(".git"):
 while True:
 
     # Tell the user what's going on and get the list of possible actions
-    print("\n\n")
+    print("---------------------------")
+    print()
     actions = Script.DescribeAndGetActions(data)
     print()
 
@@ -57,6 +58,7 @@ while True:
 
     try:
         chosen = actions[int(input("Pick an action by entering its number: "))]
+        print()
     except:
         print("Exiting...")
         exit()

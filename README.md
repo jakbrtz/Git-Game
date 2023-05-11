@@ -10,13 +10,12 @@ The puzzles are pretty short because this is supposed to be a proof-of-concept.
 This is a text-based game that you play on a terminal console. 
 Each level is independant from each other and is to be played in a separate directory. 
 
-I recommend downloading a git client. 
-
 ### Setting up a level
 
 Go into one of the level's folders. You should see a file called `Script.py` and another called `play.bat`.
-Run `play.bat` to start the game.
-The first time you run `play.bat` it should turn this folder into a git repository, and create a file called `SaveFile.json`
+The first time you run `play.bat` it should turn this folder into a git repository and create a file called `SaveFile.json`.
+
+Once the git repository is set up I suggest you open it in your favourite git client.
 
 ### Playing the level
 

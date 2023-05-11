@@ -29,9 +29,12 @@ else:
 
 # Create a git repository if it doesn't exist
 if not os.path.isdir(".git"):
-    subprocess.call("git init", shell=True, stdout=subprocess.DEVNULL)
-    subprocess.call("git add .", shell=True, stdout=subprocess.DEVNULL)
-    subprocess.call("git commit -m start", shell=True, stdout=subprocess.DEVNULL)
+    print("GIT repository not found. I'll make one.")
+    subprocess.call("git init", shell=True)
+    subprocess.call("git add .", shell=True)
+    subprocess.call("git commit -m start", shell=True)
+    print("Re-run this file to start the game.")
+    exit()
 
 # The game loop:
 while True:

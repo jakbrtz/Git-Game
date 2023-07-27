@@ -53,3 +53,11 @@ The subfolder must contain `Script.py` which must contain these functions:
 
 I recommend also copying `play.bat` into the level's folder. 
 Its purpose is to open `GameRunner.py` from the parent directory without changing the working directory. 
+
+## Future Work
+
+I've made another game with Git mechanics, and that one actually has graphics:
+
+[https://jakebortz.itch.io/anastomosis](https://jakebortz.itch.io/anastomosis)
+
+One day I might make a game that is a tutorial to Git.
